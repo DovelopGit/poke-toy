@@ -9,8 +9,11 @@ import jakarta.persistence.Id;
 public class Monster {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Long id;
+    private Long id;
 
-    public String name;
+    private String name;
 
+    private MonsterType monsterType;
+
+    private boolean isUnique;
 }
