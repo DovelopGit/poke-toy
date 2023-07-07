@@ -2,7 +2,6 @@ plugins {
     id 'java'
     id 'org.springframework.boot' version '3.1.1'
     id 'io.spring.dependency-management' version '1.1.0'
-    id 'com.ewerk.gradle.plugins.querydsl' version '1.0.10'  // QueryDSL 플러그인 추가
 }
 
 group = 'com.example'
@@ -17,29 +16,16 @@ repositories {
 }
 
 dependencies {
+    implementation 'org.springframework.session:spring-session-jdbc'
     implementation 'org.springframework.boot:spring-boot-starter'
-    implementation 'org.projectlombok:lombok:1.18.22'
     implementation 'org.springframework.boot:spring-boot-starter-web'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    implementation 'org.projectlombok:lombok:1.18.22'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-    implementation 'com.querydsl:querydsl-jpa:4.4.0'
-    testImplementation 'junit:junit:4.13.1'// QueryDSL 의존성 추가
-
-}
-
-// QueryDSL 설정 추가
-def generatedDir = "$buildDir/generated" // QueryDSL에서 생성된 소스 파일을 저장할 디렉토리 경로
-querydsl {
-    jpa = true
-    querydslSourcesDir = generatedDir
-}
-
-sourceSets {
-    main {
-        java {
-            srcDirs += [generatedDir]  // 생성된 소스 디렉토리 추가
-        }
-    }
+    implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+    annotationProcessor  'org.projectlombok:lombok'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'junit:junit'
+    testImplementation 'org.springframework.security:spring-security-test'
 }
 
 tasks.named('test') {
